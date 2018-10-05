@@ -18,7 +18,7 @@ to show tools mechanisms.
 
 To complete this tutorial clone this repository:
 
-    git clone [TODO new repo name]
+    git clone https://github.com/peopledoc/mlv-tools-tutorial
     
 Activate your **Python 3** virtual environment.
 
@@ -45,25 +45,6 @@ The use-cases to consider are the following:
 - Versioning and storage of intermediate (preprocessed) datasets; partial execution of the pipeline starting from precomputed data
   ([Use Case 2: Create a new version of a pipeline](./tutorial/use_case2.md) and [Use Case 3: Build a Pipeline from an Existing Pipeline](./tutorial/use_case3.md))
 - Hyperparameter optimisation and fine-tuning (saving results, [Use Case 4: Combine Metrics](./tutorial/use_case4.md))
-
-Proposed test pipeline:
-1. 
-    a. Raw text -> tokenizing and cleaning -> clean_data_1 (Preprocessing 1)
-    
-    b. Raw text -> tokenizing and lemmatisation and cleaning -> clean_data_2 (Preprocessing 2)
-2. 
-    a. Clean data -> Bag-of-word (hyperparameter: vocabulary size) -> encoded data
-    
-    b. Clean data -> Word Embedding -> encoded data
-    
-    c. Clean data -> fastText -> labels
-3. 
-    a. Encoded data -> Random Forests (hyperparameters: a lot) -> labels
-    
-    b. Logistic Regression -> labels
-    
-    c. Latent Dirichlet Allocation -> labels
-
 
 ## Standard Versioning Process
 

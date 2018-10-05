@@ -9,7 +9,7 @@ The structure of the project will be created along the tutorial.
 
 If it is not already done, clone the repository on the tutorial branch.
 
-    git clone -b tutorial [TODO change name]
+    git clone -b tutorial https://github.com/peopledoc/mlv-tools-tutorial
     cd ml-poc-version
 
 Create your working branch
