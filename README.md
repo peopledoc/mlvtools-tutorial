@@ -40,11 +40,23 @@ See [dummy tutorial](./tutorial/dummy.md).
 
 ## Realistic Tutorial Use Cases
 
-The use-cases to consider are the following:
+For a more realistic use case, we consider a Natural Language Processing pipeline, based on the well-known dataset 20-newsgroups. 
+
+The base pipeline is simplified to include the following steps:
+ 1. Split the data between train and test sets;
+ 2. Tokenize (split into words) the raw text input;
+ 3. Classify the cleaned input with FastText;
+ 4. Evaluate the model.
+ 
+In addition, use case 4 showcases hyperparameter tuning with a scikit-learn classifier.
+
+The use cases considered are the following:
 - Reproduce a pipeline / experience on new data ([Use Case 1: Build and Reproduce a Pipeline](./tutorial/use_case1.md))
 - Versioning and storage of intermediate (preprocessed) datasets; partial execution of the pipeline starting from precomputed data
   ([Use Case 2: Create a new version of a pipeline](./tutorial/use_case2.md) and [Use Case 3: Build a Pipeline from an Existing Pipeline](./tutorial/use_case3.md))
 - Hyperparameter optimisation and fine-tuning (saving results, [Use Case 4: Combine Metrics](./tutorial/use_case4.md))
+
+These use cases were chosen because we think they represent typical day-to-day work of a data scientist: being able to reproduce easily a pipeline made some time ago or by a coworker, versioning intermediate state of the data to avoid rerunning costly preprocessing steps, branching experiments to run tests with different classifiers, fine-tuning hyperparameters. 
 
 ## Standard Versioning Process
 
