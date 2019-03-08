@@ -1,0 +1,204 @@
+<section>
+    <h3>Jupyter Notebooks</h3>
+    <div class="two-halves">
+        <div class="half fragment">
+            <h4>... are great! </h4>
+            <ul>
+                <li class="fragment">Interactive</li>
+                <li class="fragment">Code and results</li>
+                <li class="fragment">Quick iterations</li>
+            </ul>
+        </div>
+        <div class="half fragment">
+            <h4>... are terrible! </h4>
+            <ul>
+                <li class="fragment">Awful to version</li>
+                <li class="fragment">Not tested</li>
+                <li class="fragment">Not production ready</li>
+                <li class="fragment">Data leakage</li>
+            </ul>
+        </div>
+    </div>
+    <aside class="notes">
+        @SDG Great part
+        They are even used by Netflix!
+
+        @SBI terrible part<br/>
+            - before ML thought it was just a tool for demo<br/>
+            - Merge issue<br/>
+            - sre to open a nb and exe cells
+
+    </aside>
+</section>
+<section>
+    <p>Copy-pasting </p>
+    <aside class="notes">
+        @SDG
+        End of the joke
+    </aside>
+</section>
+
+<section>
+    <p>Converting Jupyter Notebooks to <span class="emph"> scripts </span></p>
+    <aside class="notes">
+        @SDG or @SBI
+    </aside>
+</section>
+
+<section>
+    <div class="two-halves fragment">
+        <div class="big-half" style="flex-basis: 70%;">
+            <img src="./img/notebook.png"/>
+        </div>
+        <div class="small-half nb_spec" style="flex-basis: 30%; ">
+            <div class="fragment" style="text-align: left"><span class="lightemph" >I/O:</span>
+                <ul>
+                    <li>data_in</li>
+                    <li>ouput_path</li>
+                </ul>
+            </div>
+            <div class="fragment" style="text-align: left"><span class="lightemph">Mode:</span>
+                <ul>
+                    <li>subset </br> {train, test}</li>
+                </ul>
+            </div>
+            <div class="fragment"><span class="lightemph">No effect cells</span></div>
+        </div>
+    </div>
+    <aside class="notes">
+        @SDG
+        This is a notebook
+        - IO params
+        - a mode
+        - some no effect cells
+    </aside>
+</section>
+
+<section>
+    <h5><span class="emph">nbconvert</span></h5>
+    <pre><code>jupyter nbconvert --to python ./notebook.ipynb</code></pre>
+    </p>
+    <img src="./img/nb_convert/script.png"/>
+
+    <aside class="notes">
+        @SBI
+    </aside>
+</section>
+<!-- ------------------------- NB convert BEGIN-->
+<section>
+    <div class="two-halves">
+        <div class="big-half">
+            <img class="fragment current-visible" data-fragment-index="2" src="./img/nb_convert/formated_script_not_conf.png">
+            <img class="fragment current-visible" data-fragment-index="3" src="./img/nb_convert/formated_script_no_effect.png">
+        </div>
+        <ul class="small-half">
+            <li class="fragment" data-fragment-index="2" >Not configurable</li>
+            <li class="fragment" data-fragment-index="3" >Remaining no effect cells</li>
+        </ul>
+    </div>
+
+    <aside class="notes">
+        @SBI<br/>
+        - not configurable: issue no HARDCODED hyperparam
+        - rem cells => can be time consuming => no interest in NON-interactiv run
+    </aside>
+</section>
+<!-- ------------------------- NB convert END-->
+<!-- ------------------------- MLV-tool convert BEGIN-->
+<section>
+    <h5><span class="emph">MLV-tools ipynb_to_python</span></h5><br/>
+    <p class="fragment"><pre><code>ipynb_to_python -n ./notebook.ipynb -o ./script.py</code></pre><br/>
+    </p>
+
+    <p class="fragment"><span class="emph">Requirement:</span> Add a Docstring in the first code cell to describe parameters</p>
+
+    <aside class="notes">
+        Just add a simple docstring
+    </aside>
+</section>
+<section>
+
+    <img src="./img/mlv_convert/nb_docstring.png"/>
+
+    <aside class="notes">
+        Describe parameters
+    </aside>
+</section>
+<section>
+
+    <div class="fragment current-visible">
+        <img src="./img/nb_docstring_extract.png"/>
+        <pre><code>
+"""
+:param str subset: Subset of data to load {'train', 'test'}
+:param str data_in: File directory path
+:param str output_path: Output file path
+"""
+    </code></pre></div>
+    <div class="fragment current-visible">
+        <img src="./img/nb_docstring_extract.png"/>
+        <pre><code>
+"""
+:param str subset: Subset of data to load {'train', 'test'}
+:param str <span class="highlight">data_in</span>: File directory path
+:param str output_path: Output file path
+"""
+    </code></pre></div>
+    <div class="fragment current-visible">
+        <img src="./img/nb_docstring_extract.png"/>
+        <pre><code>
+"""
+:param str subset: Subset of data to load {'train', 'test'}
+:param str data_in: File directory path
+:param str <span class="highlight">output_path</span>: Output file path
+"""
+    </code></pre></div>
+    <div class="fragment current-visible">
+        <img src="./img/nb_docstring_extract.png"/>
+        <pre><code>
+"""
+:param str <span class="highlight">subset</span>: Subset of data to load {'train', 'test'}
+:param str data_in: File directory path
+:param str output_path: Output file path
+"""
+    </code></pre></div>
+</section>
+<section>
+    <div class="two-halves">
+        <div class="big-half">
+            <img class="fragment current-visible" data-fragment-index="1" src="./img/mlv_convert/script1.png">
+            <img class="fragment current-visible" data-fragment-index="2" src="./img/mlv_convert/script2.png">
+            <img class="fragment current-visible" data-fragment-index="3" src="./img/mlv_convert/script3.png">
+            <img class="fragment current-visible" data-fragment-index="4" src="./img/mlv_convert/script4.png">
+        </div>
+        <ul class="small-half" data-fragment-index="1">
+            <li class="fragment" data-fragment-index="2">Function with parameters</li>
+            <li class="fragment" data-fragment-index="3">No more no effect cells</li>
+            <li class="fragment" data-fragment-index="4">Executable as a command</li>
+        </ul>
+    </div>
+
+    <aside class="notes">
+        Same script but formatted
+        - not effect cells
+        -
+    </aside>
+</section>
+<section>
+    <h5>Executable as a command</h5>
+    <img class="fragment current-visible" data-fragment-index="2" src="./img/mlv_convert/cmd.png">
+    <img class="fragment current-visible" data-fragment-index="3" src="./img/mlv_convert/cmd_param.png">
+    <aside class="notes">
+        @SBI
+        use python script in terminal => display help
+    </aside>
+</section>
+<section>
+    <h5 class="fragment">MLV-tools ipynb_to_python</h5>
+    <ul>
+        <li class="fragment">Configurable and executable scripts</li>
+        <li class="fragment">Remove no effect cells</li>
+        <li class="fragment">Improve IDE usage (find usage, refactor, ...)</li>
+        <li class="fragment">Facilitate test writing</li>
+    </ul>
+</section>

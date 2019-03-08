@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<link rel="stylesheet" href="reveal.js/css/reveal.css">
+	<link rel="stylesheet" href="reveal.js/css/theme/mine.css">
+	<style media="screen">
+		strong {
+			color: #eee8d5;;
+		}
+		.red {
+			color: #e3170a;
+		}
+		.blue {
+			color: #279eae;
+		}
+		.reveal p.footnote {
+			font-size: 30%;
+		}
+		span.emph {
+	 		font-family: "White Rabbit", Helvetica, sans-serif;
+		  font-variant: small-caps;
+		}
+		span.lightemph {
+	 		font-family: "White Rabbit", Helvetica, sans-serif;
+		}
+		.reveal p.large {
+			font-size: 150%;
+		}
+		.reveal p.small {
+			font-size: 80%;
+			line-height: 1;
+		}
+		.reveal p.email {
+			font-family: monospace;
+			font-size: 80%;
+		}
+		.reveal img.embedded {
+			border: none;
+			box-shadow: none;
+			background-color: transparent;
+		}
+		.reveal img.aligned {
+			display: inline-block;
+			margin: 0;
+		}
+		.reveal img.no-border {
+			border: none;
+		}
+		.reveal img.icon {
+			border: none;
+			box-shadow: none;
+			background-color: transparent;
+			vertical-align: middle;
+			width:1em;
+		}
+		.reveal p.references {
+			margin-top: 2em;
+			text-align: right;
+		}
+		body {
+			text-shadow: 0 0 7px #212121;
+		}
+		.slides .footer{
+		  position:absolute;
+			font-size: 60%;
+		  bottom: -50%;
+		}
+		#left {
+		  left:-8.33%;
+		  text-align: left;
+		  float: left;
+		  width:40%;
+		  z-index:-10;
+		}
+
+	#right {
+		  left:31.25%;
+		  top: 75px;
+		  float: right;
+		  text-align: left;
+		  z-index:-10;
+		  width:60%;
+		}
+
+        .nb_spec>div {
+            margin-bottom: 8%;
+        }
+		.half {
+			flex-direction: row;
+			justify-content: center;
+			flex-basis: 50%;
+		}
+		.third {
+			flex-direction: row;
+			justify-content: center;
+			flex-basis: 33%;
+		}
+		.small-half {
+			flex-direction: row;
+			justify-content: center;
+			flex-basis: 20%;
+		}
+		.big-half {
+			flex-direction: row;
+			justify-content: center;
+			flex-basis: 80%;
+		}
+		.two-halves {
+			display: flex;
+		}
+		.parts {
+			display: flex;
+		}
+		.fragment.current-visible.visible:not(.current-fragment) {
+		    display: none;
+		    height:0px;
+		    line-height: 0px;
+		    font-size: 0px;
+		}
+
+
+         code > .step_output {
+            color: #0a1532;
+            font-weight: bold;
+		 }
+		 code > .step_input {
+		    color: #81d2c7ff;
+            font-weight: bold;
+		 }
+		.highlight {
+			color: #81d2c7ff;
+            font-weight: bold;
+		}
+		.step_cmd {
+			color: grey;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<h4>From ML experiments to production: </h4>
+				<h3> Versioning and Reproducibility </br> with MLV-tools</h3>
+				<p><i> <small> Stéphanie Bracaloni and Sarah Diot-Girard</small></i></p>
+				<aside class="notes">
+					@SDG
+				</aside>
+			</section>
+			<section>
+				<h3>About Us</h3>
+				<div class="two-halves">
+					<div class="half" style="text-align: left">
+						<span class="lightemph">Sarah Diot-Girard</span> </br>
+						Data Scientist since 2012 </br>
+						Interested in DataOps and Ethics</br>
+						<img class="icon" src="./img/GitHub-logo.png"/ alt="PeopleDoc logo" style="width: 1em"> @SgdJlbl
+					</div>
+					<div class="half" style="text-align: right">
+						<span class="lightemph">Stéphanie Bracaloni</span> </br>
+						Software Engineer since 2013</br>
+						Automation and Code Quality</br>
+						<img class="icon" src="./img/GitHub-logo.png"/ alt="PeopleDoc logo" style="width: 1em"> @sbracaloni
+					</div>
+				</div>
+				<img class="plain" src="./img/logo.png"/ alt="PeopleDoc logo" style="width: 4em">
+				<aside class="notes">
+					@SDG + @SBI
+				</aside>
+			</section>
+			<section>
+				<! Intro !>
+				<section>
+					<p style="font-size: 70%;">
+						The story, all names, characters, and incidents portrayed in this production are fictional. </br>
+						All similarities with existing past or future Data Science projects are purely coincidental.
+					</p>
+				</section>
+				<section>
+					Monday morning, 9am
+					<aside class="notes">
+						@SDG
+						It's Monday morning, 9am.
+						You're an happy DS. Friday night, you finally made  a breakthrough in your research project.
+						 you sent that to your boss.
+					</aside>
+				</section>
+				<section>
+					<div class="two-halves">
+							<div class="half">
+									<h4>Confusion Matrix </h4>
+									<img class="plain" height="44%" alt="A confusion matrix showing nice ML results" src="./img/confusion_matrix.png"/>
+
+							</div>
+							<div class="half">
+									<h4>ROC Curve </h4>
+									<img class="plain" alt="A nice ROC curve" src="./img/roc_curve.png"/>
+							</div>
+					</div>
+					<aside class="notes">
+						@SDG
+						You sent the results to your boss.
+						She loves it. She want it in production asap.
+					</aside>
+				</section>
+				<section>
+					Monday morning, 10am
+					<aside class="notes">
+						@SDG  (@SBI => "It's me")
+						It's Monday morning, 10am.
+						You are asking your SE coworker for help. You showed her your POC and now she looks like she's gonna faint
+						and she wants to kill you AT THE SAME TIME!
+					</aside>
+				</section>
+				<section>
+					<div>
+						<img class="fragment current-visible preload" src="./img/poc_worst1.png">
+						<img class="fragment current-visible" src="./img/poc_worst2.png">
+						<img class="fragment current-visible" src="./img/poc_worst3.png">
+					</div>
+					<aside class="notes">
+						@SDG
+						- git repo with format not really compatible with git versioning
+						- hardcoded stuff (path, user, ...)
+						- hardcoded hyperparameters
+					</aside>
+				</section>
+				<section>
+					Two weeks later
+					<aside class="notes">
+						@SDG
+						Two weeks later.
+						It's  Monday morning, 9am.
+						You have worked hard to clean up the POC. It's a bit better but...
+					</aside>
+				</section>
+				<section>
+					<div>
+						<img class="fragment current-visible preload" src="./img/poc_ml1.png">
+						<img class="fragment current-visible" src="./img/poc_ml2.png">
+						<img class="fragment current-visible" src="./img/poc_ml3.png">
+						<img class="fragment current-visible" src="./img/poc_ml4.png">
+					</div>
+					<aside class="notes">
+						@SDG
+						Two weeks later.
+						It's  Monday morning, 9am.
+						You have worked hard to clean up the POC. It's a bit better but...
+					</aside>
+				</section>
+				<section>
+					<div>
+						<img class="fragment current-visible preload" src="./img/poc_dev1.png">
+						<img class="fragment current-visible" src="./img/poc_dev2.png">
+						<img class="fragment current-visible" src="./img/poc_dev3.png">
+						<img class="fragment current-visible" src="./img/poc_dev4.png">
+					</div>
+					<aside class="notes">
+						@SBI<br/>
+						-Python lib + collection of tests<br/>
+						- CI to auto test running + code quality + PACKAGING<br/>
+						- No more NB, pipeline == set of scripts<br/>
+						- NO Data in the repo<br/>
+						=> long time we know how to structure CODE PRJ => tests auto and quality checks
+						and GIT perfect for versioning<br/>
+
+						@SDG=> Yes, but you reached a point here! It is not just a CODE PRJ
+					</aside>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3 class="fragment">POC vs PROD</h3>
+					<h4 class="fragment fade-up"> vs Data Scientist </h4>
+					<h4 class="fragment fade-up"> vs Software Engineer </h4>
+					<aside class="notes">
+						@SDG
+						This is the story of
+					</aside>
+				</section>
+			</section>
+			<section data-external="notebooks.html">
+				<! From Notebooks to scripting !>
+
+            <aside class="notes">
+            </aside>
+        </section>
+      </section>
+
+		</section>
+		<section>
+			<! Reproducibility and versioning !>
+			<section>
+				Two months later
+				<aside class="notes">
+					It's Monday morning, two months later.
+					These results were very nice, and you want to start from that for your next iteration.
+					First thing first, you want to reproduce it.
+				</aside>
+			</section>
+			<section>
+				<div class="two-halves">
+						<div class="half">
+								<h4>Confusion Matrix </h4>
+								<img class="plain" height="44%" alt="A confusion matrix showing nice ML results" src="./img/confusion_matrix.png"/>
+
+						</div>
+						<div class="half">
+								<h4>ROC Curve </h4>
+								<img class="plain" alt="A nice ROC curve" src="./img/roc_curve.png"/>
+						</div>
+				</div>
+				<aside class="notes">
+					It's Monday morning, two months later.
+					These results were very nice, and you want to start from that for your next iteration.
+					First thing first, you want to reproduce it.
+				</aside>
+			</section>
+          <section>
+					<pre><code>
+├── raw_data.csv
+├── cleaned_data.csv
+├── cleaned_data_final.csv
+├── cleaned_data_preprocessed_final.csv
+└── cleaned_data_preprocessed_final2.csv
+					</code></pre>
+
+					<aside class="notes">
+						But you're not sure which dataset you used...
+					</aside>
+				</section>
+				<section>
+					<h3>Data Versioning</h3>
+					<aside class="notes">
+						So what you need is
+					</aside>
+				</section>
+				<section>
+					<h3>Git</h3>
+					<div class="two-halves">
+						<div class="half fragment">
+							<h4>What's not to love?</h4>
+							<ul>
+							  <li class="fragment">Great for code</li>
+							  <li class="fragment">Collaborative</li>
+							  <li class="fragment">Everyone knows (of) it</li>
+					 	</ul>
+						</div>
+						<div class="half fragment">
+							<h4>Huge datafiles</h4>
+							<ul>
+							  <li class="fragment">Bloats the repository</li>
+							  <li class="fragment">Binary?</li>
+							  <li class="fragment">So slow and tedious...</li>
+							</ul>
+						</div>
+					</div>
+					<aside class="notes">
+
+					</aside>
+				</section>
+				<section>
+					<h3>Git LFS / Git annex</h3>
+					<div class="two-halves">
+						<div class="half fragment">
+							<h4>What's not to love?</h4>
+							<ul>
+							  <li class="fragment">Great for handling larger files</li>
+							  <li class="fragment">Git integration</li>
+							  <li class="fragment">Open-source</li>
+					 	</ul>
+						</div>
+						<div class="half">
+						</div>
+					</div>
+					<aside class="notes">
+
+					</aside>
+				</section>
+				<section>
+						Data <img class="icon" src="./img/icons/database.png"/>
+						+ code <img class="icon" src="./img/icons/gear.png"/>
+						+ hyperparameters <img class="icon" src="./img/icons/parameters.png"/>
+						= metrics <img class="icon" src="./img/icons/analytics.png"/>
+
+					<aside class="notes">
+						In truth, a ML experiments is:
+						And we need to version it all together
+					</aside>
+				</section>
+				<section>
+					<pre><code>
+├── raw_data.csv		mar   8		12:17
+└── preprocessed_data.csv 	fev   26	13:24
+					</code></pre>
+					<aside class="notes">
+						Preprocessing is taking a long time; save intermediary results.
+						Preprocessing was changed recently, was the intermediary result file rerun inbetween or is it outdated ?
+					</aside>
+				</section>
+				<section>
+						Data <img class="icon" src="./img/icons/database.png"/>
+						x code <img class="icon" src="./img/icons/gear.png"/>
+						x hyperparameters <img class="icon" src="./img/icons/parameters.png"/>
+						= metrics <img class="icon" src="./img/icons/analytics.png"/>
+
+					<aside class="notes">
+						In truth, a ML experiments is:
+						And we need to version it all together
+					</aside>
+				</section>
+            </section>
+                <section data-external="dvc.html">
+                    <! DVC !>
+
+                    <aside class="notes">
+                        On the source versioning, now the SE and the DS are happy
+                    </aside>
+                </section>
+
+			<section>
+				<! REx and future work !>
+				<section>
+					<h3> Is DataOps solved? </h3>
+				</section>
+				<section>
+					<p> Not quite yet </p>
+					<aside class="notes">
+						@SDG still a young project
+						Suitable to our use cases, eager to hear about your usage and problematics
+						Gladly welcoming contributions and feature requests
+					</aside>
+				</section>
+				<section>
+					<div class="two-halves">
+						<div class="half">
+							<h4>For the data scientists</h4>
+							<ul>
+								<li class="fragment">Modular improvements</li>
+							  <li class="fragment">Fast iterations</li>
+							  <li class="fragment">Confidence in results</li>
+								<li class="fragment"> Cannot loose data </li>
+					 	</ul>
+						</div>
+						<div class="half fragment">
+							<h4>For the engineers</h4>
+							<ul>
+							  <li class="fragment">Full power of IDE</li>
+							  <li class="fragment">Functional tests</li>
+							  <li class="fragment">CI and production-ready</li>
+							</ul>
+						</div>
+					</div>
+					<aside class="notes">
+						Fast iterations thanks to saved intermediary results<br/>
+
+						@SBI: IDE => Enjoy IDE features<br/>
+						Now plan how to pacjgae to go in prod<br/>
+						...
+
+
+					</aside>
+				</section>
+				<section>
+					<h3> Current limitations</h3>
+					<ul>
+					  <li>DVC is another CLI tool</li>
+					  <li>Git and DVC checkout for switching branches </li>
+					</ul>
+					<aside class="notes">
+
+					</aside>
+				</section>
+				<section>
+					<h3> Under development </h3>
+					<ul>
+					  <li>Checking if all scripts are up-to-date when pushing</li>
+					  <li>Easily comparing metrics between experiments</li>
+					  <li>Pipeline packaging (with Debian and Anaconda)</li>
+						<li>Dynamically handling of hyperparameters</li>
+					 </ul>
+					<aside class="notes">
+						@SBI<br/>
+						- What if push commit with modif nb no update script... INCONSISTENTCY..<br/>
+						=> SMART diff tool => ci or git hook<br/>
+						- Packaging (alradey export outside DVC, static , interactive, conf) + packaging<br/>
+
+
+					</aside>
+				</section>
+				<section>
+					<h3> Future work </h3>
+					DVC pipelines as powerful as <span class="emph">scikit-learn pipelines</span>
+					<ul>
+					  <li>Cross-validation</li>
+					  <li>Hyperparameter tuning</li>
+				 	</ul>
+					<aside class="notes">
+
+					</aside>
+				</section>
+				<section>
+					<h3> Future work </h3>
+					We want to hear about <span class="emph">your</span> use cases!
+
+					</aside>
+				</section>
+			</section>
+			<section>
+				<h3> We are waiting for your Pull Requests! </h3>
+				<p class="small">
+				</br></br>
+					<img class="icon" src="./img/GitHub-logo.png"/ alt="PeopleDoc logo" style="width: 1em">
+					github.com/peopledoc/ml-versioning-tools </br>
+					<img class="icon" src="./img/GitHub-logo.png"/ alt="PeopleDoc logo" style="width: 1em">
+					github.com/peopledoc/mlv-tools-tutorial
+				</p>
+				<img class="plain" src="./img/logo.png"/ alt="PeopleDoc logo" style="width: 4em">
+
+				<p class="footnote">
+					Fonts: <span class="lightemph">White Rabbit</span>
+					by <a href="https://www.fontsquirrel.com/license/white-rabbit"> Matthew Welch </a> </br>
+						Capsuula by <a href="https://www.fontsquirrel.com/license/capsuula"> Henrich Fichna  </a> </br>
+					Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a>,
+					 <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a>,
+					 <a href="https://www.flaticon.com/authors/designmodo" title="Designmodo">Designmodo</a>,
+					 <a href="https://www.flaticon.com/<?=_('authors').'/'?>freepik" title="Freepik">Freepik</a>
+					from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>;
+					 license <a href="http://creativecommons.org/licenses/by/3.0/" 		    title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></p>
+			</section>
+		</div>
+	</div>
+	<script src="reveal.js/js/reveal.js"></script>
+	<script src="head.min.js"></script>
+	<script>
+		Reveal.initialize({
+			history: true,
+			slideNumber: true,
+			dependencies: [
+					{ src: 'reveal.js/plugin/notes/notes.js', async: true },
+					{ src: 'reveal.js/plugin/external/external/external.js',
+					condition: function() { return !!document.querySelector( '[data-external]' ); } }
+				],
+
+		});
+		Reveal.addEventListener( 'slidechanged', function( event ) {
+    Reveal.nextFragment();
+} );
+	</script>
+</body>
+</html>
