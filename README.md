@@ -15,7 +15,7 @@ to show tools mechanisms.
 
 **Requirements:**
 
-Before starting, you must be able to run following commands: 
+Before starting, you must be familiar with the following commands: 
 - virtualenv or condaenv
 - make
 - git
@@ -26,15 +26,15 @@ Before starting, you must be able to run following commands:
 
 DVC: an open-source tool for data science and machine learning projects. Use to version, share and reproduce.
 
-MLflow tracking: api and UI to log and visualize metrics obtained during experiments.
+MLflow tracking: API and UI to log and visualize metrics obtained during experiments.
 
-MLV-tools: provide a set of tools to enhance Jupyter Notebooks conversion and DVC versioning and pipelining.  
+MLV-tools: provides a set of tools to enhance Jupyter Notebooks conversion and DVC versioning and pipelining.  
 
 
 Please have a look to the [presentation](https://peopledoc.github.io/mlv-tools-tutorial/talks/pyData/presentation.html)
 
 
-## What are we bringing out
+## Our main features
 
 - Notebook parametrized conversion ([MLV-tools](https://github.com/peopledoc/ml-versioning-tools))
 
@@ -45,12 +45,12 @@ Please have a look to the [presentation](https://peopledoc.github.io/mlv-tools-t
 
 ## Standard Versioning Process Establishment
 
-**Aim:** find a way to version code, data and pipelines.
+**Goal:** find a way to version code, data and pipelines.
 
 #### Existing project
 
-Starting from an existing project composed of Python 3 module(s) and a set of **Jupyter notebooks**
-we wan to create an automatised pipeline in view to version, share and reproduce experiments.
+Starting from an existing project composed of Python 3 module(s) and a set of **Jupyter notebooks**,
+we want to create an automated pipeline in order to version, share and reproduce experiments.
 
             
     │── classifier
@@ -71,14 +71,15 @@ we wan to create an automatised pipeline in view to version, share and reproduce
     │── setup.cfg
     │── setup.py
  
-Applied transformations will let us handle data using metadata file. And convert **Jupyter notebooks** to 
-Python scripts. We need to keep in mind that:
+The data flow is processed by applying steps and intermediary results are versioned using metadata files. These steps are defined in **Jupyter notebooks**, which are then converted to Python scripts.
 
- - The step code reference remain in **Jupyter notebook** 
- - Pipelines in structured according to its inputs and outputs
+Keep in mind that:
+
+ - The reference for the code of the step remains in **Jupyter notebook** 
+ - Pipelines are structured according to their inputs and outputs
  - Hyperparameters are pipeline inputs
  
-#### Result
+#### Project after refactoring
 
     │── classifier
     │   ├── aggregate_classif.py
@@ -111,7 +112,7 @@ Python scripts. We need to keep in mind that:
 **DVC pipeline steps**: DVC command applied on generated Python 3 scripts
 
 
-#### Apply the process
+#### Applying the process
 
 For each **Jupyter notebook** a **Python 3** parameterizable and executable script is generated. It is the way to 
 version code and be able to automatize its run.
