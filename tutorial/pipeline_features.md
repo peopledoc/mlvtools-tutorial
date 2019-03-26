@@ -1,13 +1,14 @@
-# Dummy Pipeline
+# MLV-tools pipeline features
 
-The aim of this tutorial is to show how **MLV-tools**, **DVC** and **MLflow tracking** work on a trivial case.
+**Goal**: show how **MLV-tools**, **DVC** and **MLflow tracking** work on a trivial case.
 
-The pipeline converts an unreadable input into a readable text. It is composed with:
 
-- a basic step with only input and output parameters (#1, #4) 
-- a step with more parameters (#2)
-- a step with a specific DVC command (#3)
-- a step using MLflow (#5)
+The pipeline converts an unreadable input into a readable text. It is composed with specific steps:
+
+- (basic) only input and output parameters (#1, #4) 
+- with extra parameters (#2)
+- with a specific DVC command (#3)
+- using MLflow (#5)
 
                                                           * dummy_pipeline_feed.txt                       
                                                           *
@@ -37,11 +38,11 @@ The pipeline converts an unreadable input into a readable text. It is composed w
         
   
 
-It is also in view to explore how the pipeline repro feature works:
-- with the cache
-- without the cache
-- modifying input and running the whole pipeline 
-- modifying input and running a sub-pipeline 
+Following features will be demonstrated: 
+- reproducing a pipeline using the cache
+- reproducing a pipeline without the cache
+- modifying input and run the whole pipeline 
+- modifying input and run a sub-pipeline 
 - modifying the code
 - modifying an hyperparameter
 
