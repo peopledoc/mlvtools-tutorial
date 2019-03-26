@@ -1,0 +1,27 @@
+{
+  "name": "external-js",
+  "authors": [
+    "Cal Evans <cal@calevans.com>",
+    "Matthew Setter <matthew@matthewsetter.com>"
+  ],
+  "description": "External file importer for reveal.js",
+  "version": "1.0.1",
+  "main": "external/external.js",
+  "keywords": [
+    "reveal.js",
+    "external.js"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/settermjd/external",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/calevans/external.git"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

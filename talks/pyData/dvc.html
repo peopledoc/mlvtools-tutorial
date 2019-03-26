@@ -1,0 +1,282 @@
+<section>
+    <p>Enters <span class="emph"> DVC </span></p>
+    <aside class="notes">
+    </aside>
+</section>
+
+<section>
+    <h5>DVC - Data Version Control</h5>
+    <div class="fragment"><span class="emph">Open-source</span> Version Control System for Machine Learning Projects</div>
+    <blockquote class="fragment fade-up">"For data scientists, by data scientists"</blockquote>
+    <p class="fragment">
+        <a href="https://github.com/iterative/dvc">
+            <img class="icon" src="./img/GitHub-logo.png" alt="GitHub logo" style="width: 1em"> iterative/dvc
+        </a>
+    </p>
+    <p class="fragment">
+        <a href="https://youtu.be/4h6I9_xeYA4">
+            <img class="icon" src="./img/icons/youtube.png" alt="youtube logo" style="width: 1em">how it works!
+        </a>
+    </p>
+
+    <aside class="notes">
+        @SBI<br/>
+
+        - Open source - Apache Licence<br/>
+        - Versionign tool for ml<br/>
+        - for... by ...<br/>
+
+        - see ... <br/>
+        TRANSITION: Not just a versioning tool
+    </aside>
+</section>
+
+<section>
+    <h5>DVC - Data Version Control</h5>
+    <div>
+        <img class="fragment current-visible" data-fragment-index="0" src="./img/dvc/dvc_home_page1.png">
+        <img class="fragment current-visible" data-fragment-index="1" src="./img/dvc/dvc_home_page2.png">
+        <img class="fragment current-visible" data-fragment-index="2" src="./img/dvc/dvc_home_page3.png">
+    </div>
+    <aside class="notes">
+        @SBI
+        - Versioning tool => DATA cache mechanism (REMOTE or LOCAL) <br/>
+            => Meatadat sous git (close to git lfs)<br/><br/>
+
+        - Amazing tool to perform experiment<br/>
+          - Project is handle as a PIPELINE composed of several STEP and DEPENDENCIES<br/>
+
+        - Collaboration: PUSH and PULL
+    </aside>
+</section>
+<section>
+    <h5>DVC - How it works</h5>
+
+    <div>
+        <img class="fragment current-visible" src="./img/dvc/pipeline/DVC1.png">
+        <img class="fragment current-visible" src="./img/dvc/pipeline/DVC2.png">
+        <img class="fragment current-visible" src="./img/dvc/pipeline/DVC3.png">
+        <img class="fragment current-visible" src="./img/dvc/pipeline/DVC4.png">
+        <img class="fragment current-visible" src="./img/dvc/pipeline/DVC5.png">
+        <img class="fragment current-visible" src="./img/dvc/pipeline/DVC6.png">
+        <img class="fragment current-visible" src="./img/dvc/pipeline/DVC7.png">
+        <img class="fragment current-visible" src="./img/dvc/pipeline/DVC8.png">
+        <img class="fragment current-visible" src="./img/dvc/pipeline/DVC9.png">
+    </div>
+    <p style="text-align: left"> Save all intermediate results: Metadata <span class="emph">+</span> data</p>
+    <aside class="notes">
+
+    </aside>
+</section>
+
+<section>
+    <h5>DVC - Reproduce only sub pipeline</h5>
+    <div>
+        <img class="fragment current-visible" data-fragment-index="0" src="./img/dvc/pipeline/DVC9.png">
+        <img class="fragment current-visible" data-fragment-index="1" src="./img/dvc/pipeline/DVC_change0.png">
+        <img class="fragment current-visible" data-fragment-index="2" src="./img/dvc/pipeline/DVC_change1.png">
+        <img class="fragment current-visible" data-fragment-index="3" src="./img/dvc/pipeline/DVC_change2.png">
+        <img class="fragment current-visible" data-fragment-index="4" src="./img/dvc/pipeline/DVC_change2bis.png">
+        <img class="fragment current-visible" data-fragment-index="5" src="./img/dvc/pipeline/DVC_change2bis.png">
+        <pre class="fragment current-visible" data-fragment-index="5"><code>dvc repro evaluate.dvc</code></pre>
+        <img class="fragment current-visible" data-fragment-index="6" src="./img/dvc/pipeline/DVC_change3.png">
+        <pre class="fragment current-visible" data-fragment-index="6"><code>dvc repro evaluate.dvc</code></pre>
+        <img class="fragment current-visible" data-fragment-index="7" src="./img/dvc/pipeline/DVC_change4.png">
+        <pre class="fragment current-visible" data-fragment-index="7"><code>dvc repro evaluate.dvc</code></pre>
+        <img class="fragment current-visible" data-fragment-index="8" src="./img/dvc/pipeline/DVC_change5.png">
+        <pre class="fragment current-visible" data-fragment-index="8"><code>dvc repro evaluate.dvc</code></pre>
+        <img class="fragment current-visible" data-fragment-index="9" src="./img/dvc/pipeline/DVC_change5.png">
+        <pre class="fragment current-visible" data-fragment-index="9"><code>dvc repro evaluate.dvc</code></pre>
+    </div>
+    <p class="fragment current-visible" data-fragment-index="9" style="text-align: left">Do not re-run time consuming tasks</p>
+    <aside class="notes">
+        @SBI<br/>
+        - Change param<br/>
+        - Want to recalculate METRICS<br/>
+        - run DVC ... evaluate step<br/>
+        - DETECTS out of date steps<br/>
+        - Re- run only needed tasks<br/>
+        - NO time consuming
+
+
+    </aside>
+</section>
+
+
+<section>
+    <h5>How to use</h5>
+    <p>
+    <pre><code>dvc run -d <span class="step_input">[input_dep]</span> -o <span class="step_output">[output]</span> [command]</code></pre>
+    </p>
+</section>
+
+<section>
+    <h5>How to use - example</h5>
+    <div class="fragment">
+        <p>Step:
+        <pre><code>extract.py --input ./data.tgz --out ./out/train_set.csv</code></pre>
+        </p>
+    </div>
+    <div class="fragment">With DVC:
+        <pre class="fragment current-visible"><code>
+<span class="step_cmd">dvc run -d ./data.tgz -o ./out/train_set.csv \</span>
+        extract.py --input ./data.tgz --out ./out/train_set.csv
+    </code></pre>
+        <pre class="fragment current-visible"><code>
+dvc run -d ./data.tgz -o ./out/train_set.csv \
+        extract.py --input ./data.tgz --out ./out/train_set.csv
+    </code></pre>
+        <pre class="fragment current-visible"><code>
+dvc run -d <span class="step_input">./data.tgz</span> -o ./out/train_set.csv \
+        extract.py --input <span class="step_input">./data.tgz</span> --out ./out/train_set.csv
+    </code></pre>
+        <pre class="fragment current-visible"><code>
+dvc run -d <span class="step_input">./data.tgz</span> -o <span class="step_output">./out/train_set.csv</span> \
+        extract.py --input <span class="step_input">./data.tgz</span> --out <span class="step_output">./out/train_set.csv</span>
+    </code></pre>
+        </p>
+    </div>
+    <aside class="notes">
+        @SBI:<br/>
+        - python step <br/>
+        - add DVC + dep + out<br/>
+        - TEDIOUS
+
+
+    </aside>
+</section>
+<section>
+    <h5>DVC</h5>
+    <div class="two-halves">
+        <div class="half fragment">
+            <h4>... is great! </h4>
+            <ul>
+                <li class="fragment">Handle dependencies</li>
+                <li class="fragment">Cache mechanism</li>
+                <li class="fragment">Reproducibility</li>
+                <li class="fragment">Facilitate collaboration</li>
+                <li class="fragment">Language agnostic</li>
+            </ul>
+        </div>
+        <div class="half fragment">
+            <h4>... but </h4>
+            <ul>
+                <li class="fragment">Risk of inconsistencies</li>
+                <li class="fragment">Tedious to write/setup</li>
+            </ul>
+        </div>
+    </div>
+    <aside class="notes">
+        @SDG<br/>
+        1. Step order => Track dependencies (know which steps are needed to achieve a targeted step)<br/>
+        2. Cache meca => save intermediate res + Reproduce sub pipeline (avoid time consuming task)<br/>
+        3. Repro on any setup server<br/>
+        4. Share data<br/>
+        5. works with any executable<br/>
+    </aside>
+</section>
+<section>
+    <h5>MLV-tools gen_dvc</h5>
+    <pre><code>gen_dvc -i ./script.py -o ./commands/script_dvc</code></pre>
+
+</section>
+<section>
+    <h5>The script</h5>
+    <img class="fragment current-visible" data-fragment-index="2" src="./img/mlv_convert/script2.png">
+    <aside class="notes">
+        Previously generated with ipynb_to_dvc
+    </aside>
+</section>
+<section>
+
+    <div class="fragment current-visible">
+        <img src="./img/dvc/script_docstring_extract.png"/>
+        <pre><code>
+"""
+:param str subset: Subset of data to load {'train', 'test'}
+:param str data_in: File directory path
+:param str output_path: Output file path
+"""
+    </code></pre></div>
+    <div class="fragment current-visible">
+        <img src="./img/dvc/script_docstring_extract.png"/>
+        <pre><code>
+"""
+:param str subset: Subset of data to load {'train', 'test'}
+:param str <span class="highlight">data_in</span>: File directory path
+:param str output_path: Output file path
+
+<span class="highlight">:dvc-in data_in: ./data/all.zip</span>
+"""
+    </code></pre></div>
+    <div class="fragment current-visible">
+        <img src="./img/dvc/script_docstring_extract.png"/>
+        <pre><code>
+"""
+:param str subset: Subset of data to load {'train', 'test'}
+:param str data_in: File directory path
+:param str <span class="highlight">output_path</span>: Output file path
+
+:dvc-in data_in: ./data/all.zip
+<span class="highlight">:dvc-out output_path: ./data/data_train.csv</span>
+"""
+    </code></pre></div>
+    <div class="fragment current-visible">
+        <img src="./img/dvc/script_docstring_extract.png"/>
+        <pre><code>
+"""
+:param str <span class="highlight">subset</span>: Subset of data to load {'train', 'test'}
+:param str data_in: File directory path
+:param str output_path: Output file path
+
+:dvc-in data_in: ./data/all.zip
+:dvc-out output_path: ./data/data_train.csv
+<span class="highlight">:dvc-extra: --subset test</span>
+"""    </code></pre></div>
+</section>
+<section>
+    <h5>The generation</h5>
+    <img class="fragment current-visible" data-fragment-index="2" src="./img/dvc/gen_dvc.png">
+    <aside class="notes">
+        easy to use
+    </aside>
+</section>
+<section>
+    <h5>The generated bash command</h5>
+    <img src="./img/dvc/dvc_cmd.png">
+    <aside class="notes">
+        @SBI<br/>
+        - You can see: dvc run CMD + dep + out<br/>
+        - + step python
+    </aside>
+</section>
+
+
+<section>
+    <h5>Benefits</h5>
+    <ul class="fragment">
+        <li class="fragment">Easily generate DVC steps</li>
+        <li class="fragment">Easily create a DVC pipeline</li>
+        <li class="fragment">Avoid inconsistencies</li>
+    </ul>
+    <aside class="notes">
+        @SDG
+
+        +@SBI?
+        - mentioner que marche que avec conf => voir tuto online<br/>
+        - Everything is in the Docstring (initialy in the jupyter or script)<br/>
+        - Docstring can be a template using a pipeline conf (tuto et readme)<br/>
+    </aside>
+</section>
+
+<section>
+    <h5>Going furter: ipynb_to_dvc</h5>
+    <pre class="fragment"><code>ipynb_to_dvc -n ./notebook.ipynb</code></pre>
+    <img class="fragment current-visible plain" src="./img/global_schema1.png">
+    <img class="fragment current-visible plain" src="./img/global_schema2.png">
+    <aside class="notes">
+        - MLV-tools tools are linked but can be used idependantly<br/>
+        - mentioner que marche que avec conf => voir tuto online<br/>
+        - Keep ref in jupyter notebook<br/>
+    </aside>
+</section>

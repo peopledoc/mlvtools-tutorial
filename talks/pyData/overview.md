@@ -1,0 +1,25 @@
+- About-US (DUO)
+- Intro => DS point of view / SE poview (DUO)
+- Poc vs Prod ... vs DS vs SE
+- Jupyter Notebooks
+     - Opposition
+     - Joke
+     - NB convert
+     - MLV tools
+     - Benefit of MLVtools
+     
+- 2 Months Later (repro)
+     - PBL
+     - Git 
+     - Git Lfs
+     - Pipeline = data x code ...
+     -
+- DVC 
+    - what is it?
+    - how it works
+    - example
+    - benefits vs relou
+- MLVtools gen_dvc
+- MLVtools ipynb_to_dvc
+
+-REX
