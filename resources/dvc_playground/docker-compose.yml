@@ -1,0 +1,30 @@
+version: '3'
+services:
+  remote_dvc_repo:
+    build:
+      context: ./remote_dvc
+    ports:
+    - "22:22"
+
+  remote_git_repo:
+    build:
+      context: ./remote_git
+
+  user1:
+    build:
+      context: ./user
+      args:
+        USER_NAME: "songoku"
+    command: tail -f /dev/null
+    links:
+      - remote_dvc_repo:dvc_srv
+      - remote_git_repo:git_srv
+  user2:
+    build:
+      context: ./user
+      args:
+        USER_NAME: "bulma"
+    command: tail -f /dev/null
+    links:
+      - remote_dvc_repo:dvc_srv
+      - remote_git_repo:git_srv
