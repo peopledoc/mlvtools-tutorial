@@ -1,0 +1,16 @@
+@font-face {
+    font-family: 'White Rabbit';
+    src: url('WhiteRabbit.woff2') format('woff2'),
+        url('WhiteRabbit.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Capsuula';
+    src: url('Capsuula.woff2') format('woff2'),
+        url('Capsuula.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+

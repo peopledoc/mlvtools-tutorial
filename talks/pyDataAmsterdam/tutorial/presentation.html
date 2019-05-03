@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="reveal.js/css/reveal.css">
+    <link rel="stylesheet" href="reveal.js/css/theme/mine.css">
+    <style media="screen">
+		strong {
+			color: #eee8d5;;
+		}
+		.red {
+			color: #e3170a;
+		}
+		.blue {
+			color: #279eae;
+		}
+		.reveal p.footnote {
+			font-size: 30%;
+		}
+		span.emph {
+	 		font-family: "White Rabbit", Helvetica, sans-serif;
+		  font-variant: small-caps;
+		}
+		span.lightemph {
+	 		font-family: "White Rabbit", Helvetica, sans-serif;
+		}
+		.reveal p.large {
+			font-size: 150%;
+		}
+		.reveal p.small {
+			font-size: 80%;
+			line-height: 1;
+		}
+		.reveal p.email {
+			font-size: 80%;
+			color: #2A76DD
+		}
+		.reveal img.embedded {
+			border: none;
+			box-shadow: none;
+			background-color: transparent;
+		}
+		.reveal img.aligned {
+			display: inline-block;
+			margin: 0;
+		}
+		.reveal img.no-border {
+			border: none;
+		}
+		.reveal img.icon {
+			border: none;
+			box-shadow: none;
+			background-color: transparent;
+			vertical-align: middle;
+			width:1em;
+		}
+		.reveal p.references {
+			margin-top: 2em;
+			text-align: right;
+		}
+		body {
+			text-shadow: 0 0 7px #212121;
+		}
+		.slides .footer{
+		  position:absolute;
+			font-size: 60%;
+		  bottom: -50%;
+		}
+		#left {
+		  left:-8.33%;
+		  text-align: left;
+		  float: left;
+		  width:40%;
+		  z-index:-10;
+		}
+
+	#right {
+		  left:31.25%;
+		  top: 75px;
+		  float: right;
+		  text-align: left;
+		  z-index:-10;
+		  width:60%;
+		}
+
+        .nb_spec>div {
+            margin-bottom: 8%;
+        }
+		.half {
+			flex-direction: row;
+			justify-content: center;
+			flex-basis: 50%;
+		}
+		.third {
+			flex-direction: row;
+			justify-content: center;
+			flex-basis: 33%;
+		}
+		.small-half {
+			flex-direction: row;
+			justify-content: center;
+			flex-basis: 20%;
+		}
+		.big-half {
+			flex-direction: row;
+			justify-content: center;
+			flex-basis: 80%;
+		}
+		.two-halves {
+			display: flex;
+		}
+		.parts {
+			display: flex;
+		}
+		.fragment.current-visible.visible:not(.current-fragment) {
+		    display: none;
+		    height:0px;
+		    line-height: 0px;
+		    font-size: 0px;
+		}
+
+
+         code > .step_output {
+            color: #0a1532;
+            font-weight: bold;
+		 }
+		 code > .step_input {
+		    color: #81d2c7ff;
+            font-weight: bold;
+		 }
+		.highlight {
+			color: #81d2c7ff;
+            font-weight: bold;
+		}
+		.select {
+		        color: white;
+                background-color: #98bdef;
+
+		}
+		.step_cmd {
+			color: grey;
+		}
+
+
+
+    </style>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h4>Setup and version your ML project</h4>
+            <h3>with MLV-tools and DVC</h3>
+            <p><i>
+                <small> Stéphanie Bracaloni & Sarah Diot-Girard</small>
+            </i></p>
+            <aside class="notes">
+                @SDG
+            </aside>
+        </section>
+        <section>
+            <h3>About Us</h3>
+            <div class="two-halves">
+                <div class="half" style="text-align: left">
+                    <span class="lightemph">Sarah Diot-Girard</span> </br>
+                    Data Scientist since 2012 </br>
+                    Interested in DataOps and Ethics</br>
+                    <img class="icon" src="./img/GitHub-logo.png"/ alt="PeopleDoc logo" style="width: 1em"> @SgdJlbl
+                </div>
+                <div class="half" style="text-align: right">
+                    <span class="lightemph">Stéphanie Bracaloni</span> </br>
+                    Software Engineer since 2013</br>
+                    Automation and Code Quality</br>
+                    <img class="icon" src="./img/GitHub-logo.png"/ alt="PeopleDoc logo" style="width: 1em"> @sbracaloni
+                </div>
+            </div>
+            <img class="plain" src="./img/logo.png"/ alt="PeopleDoc logo" style="width: 4em">
+            <aside class="notes">
+                @SDG + @SBI
+            </aside>
+        </section>
+
+        <section>
+            <h4>Major issues:</h4>
+            <ul>
+                <li class="fragment">Versioning (Data & Jupyter Notebooks)</li>
+                <li class="fragment">Automate the pipeline execution</li>
+                <li class="fragment">Reproduce & Share experiments</li>
+            </ul>
+            <aside class="notes">
+                - Test, IDE, CI, ..
+            </aside>
+        </section>
+        <section data-external="dvc.html">
+        </section>
+        <section>
+            <section>
+                <h3>Setup a project using MLV-tools</h3>
+                <div>
+                    <ul>
+                    <li class="fragment" style="margin-top:8%" >
+                        Easily create <span class="emph">DVC steps</span> from command line pipeline steps
+                    </li>
+                    </ul>
+                    <pre class="fragment"><code>gen_dvc -i ./script.py -o ./commands/script_dvc</code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h3>Setup a project using MLV-tools</h3>
+                <div>
+                    <ul>
+                    <li class="fragment" >
+                        Convert Jupyter Notebooks to <br/>
+                        <span class="emph">executable</span> and <span class="emph">configurable</span>
+                        Python3 scripts
+
+                    </li>
+                    </ul>
+                    <pre class="fragment"><code>ipynb_to_python -n ./notebook.ipynb -o ./script.py</code></pre>
+                </div>
+            </section>
+
+            <section>
+                <h3>Setup a project using MLV-tools</h3>
+                <div>
+                    <ul>
+                    <li class="fragment" >
+                        Convert Jupyter Notebooks to <span class="emph">DVC steps</span> in one command
+                    </li>
+                    </ul>
+                    <pre class="fragment"><code>ipynb_to_dvc -n ./notebook.ipynb -o ./commands/script_dvc</code></pre>
+                    <pre class="fragment" style="margin-top:8%">
+<code>
+[Tutorial time]
+
+Clone <a href="https://github.com/peopledoc/mlv-tools-tutorial">MLV-tools tutorial</a> repository
+
+Resources:
+mlv-tools-tutorial/resources/setup_project
+
+How to:
+mlv-tools-tutorial/tutorial/setup_project.md
+
+</code></pre>
+                </div>
+            </section>
+        </section>
+        <section>
+            <h3> We are waiting for your Pull Requests! </h3>
+            <p class="small">
+                </br></br>
+                <img class="icon" src="./img/GitHub-logo.png" alt="PeopleDoc logo" style="width: 1em"/>
+                github.com/peopledoc/ml-versioning-tools </br>
+                <img class="icon" src="./img/GitHub-logo.png" alt="PeopleDoc logo" style="width: 1em"/>
+                github.com/peopledoc/mlv-tools-tutorial
+            </p>
+            <img class="plain" src="./img/logo.png" alt="PeopleDoc logo" style="width: 4em"/>
+
+            <p class="footnote">
+                Fonts: <span class="lightemph">White Rabbit</span>
+                by <a href="https://www.fontsquirrel.com/license/white-rabbit"> Matthew Welch </a> </br>
+                Capsuula by <a href="https://www.fontsquirrel.com/license/capsuula"> Henrich Fichna </a> </br>
+                Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a>,
+                <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a>,
+                <a href="https://www.flaticon.com/authors/designmodo" title="Designmodo">Designmodo</a>,
+                <a href="https://www.flaticon.com/<?=_('authors').'/'?>freepik" title="Freepik">Freepik</a>
+                from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>;
+                license <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0"
+                           target="_blank">CC 3.0 BY</a></p>
+        </section>
+        <section>
+            <h3>Contact Us !</h3>
+            <br/>
+            <p class="email">sarah_diot-girard@ultimatesoftware.com</p>
+            <p class="email">stephanie_bracaloni@ultimatesoftware.com</p>
+        </section>
+        <section>
+            <h3>Time Optimization</h3>
+
+            <h5>Tutorial Part1: build docker images</h5>
+            <pre>
+<code>cd mlv-tools-tutorial/resources/dvc_playground
+docker-compose build</code></pre>
+            <h5>Tutorial Part2: build docker image (Optional)</h5>
+
+            (Can also be run on your computer)
+            <pre>
+                <code>./resources/setup_project/docker/run.sh</code></section>
+    </div>
+</div>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="head.min.js"></script>
+<script>
+		Reveal.initialize({
+			history: true,
+			slideNumber: true,
+			dependencies: [
+					{ src: 'reveal.js/plugin/notes/notes.js', async: true },
+					{ src: 'reveal.js/plugin/external/external/external.js',
+					condition: function() { return !!document.querySelector( '[data-external]' ); } }
+				],
+
+		});
+		Reveal.addEventListener( 'slidechanged', function( event ) {
+    Reveal.nextFragment();
+} );
+
+
+</script>
+</body>
+</html>

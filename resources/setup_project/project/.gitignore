@@ -1,0 +1,6 @@
+venv
+*.egg-info
+__pycache__/
+**.ipynb_checkpoints
+*.pytest_cache
+*.idea
