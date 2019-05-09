@@ -1,0 +1,149 @@
+<section>
+    <h5 class="fragment" data-fragment-index="0">Pipeline and data versioning </h5>
+    <div class="two-halves">
+        <div class="big-half">
+            <pre class="fragment" ><code>
+├── raw_data.csv
+├── cleaned_data.csv
+├── cleaned_data_final.csv
+├── cleaned_data_preprocessed_final.csv
+└── cleaned_data_preprocessed_final2.csv
+            </code></pre>
+        </div>
+        <div class="small-half">
+            <p class="fragment">Input versionning</p>
+        </div>
+    </div>
+    <div class="two-halves">
+        <div class="big-half">
+            <pre class="fragment" ><code>
+├── raw_data.csv            <span class="select">mar    8	12:17</span>
+└── preprocessed_data.csv   feb   26	13:24
+            </code></pre>
+        </div>
+        <div class="small-half" >
+            <p class="fragment" >Execution order & dependencies</p>
+        </div>
+    </div>
+
+    <aside class="notes">
+    </aside>
+</section>
+
+<section>
+    <h5>DVC - Data Version Control</h5>
+    <div class="fragment"><span class="emph">Open-source</span> Version Control System for Machine Learning Projects
+    </div>
+    <blockquote class="fragment fade-up">"For data scientists, by data scientists"</blockquote>
+    <p class="fragment">
+        <a href="https://github.com/iterative/dvc">
+            <img class="icon" src="./img/GitHub-logo.png" alt="GitHub logo" style="width: 1em"> iterative/dvc
+        </a>
+    </p>
+    <p class="fragment">
+        <a href="https://youtu.be/4h6I9_xeYA4">
+            <img class="icon" src="./img/icons/youtube.png" alt="youtube logo" style="width: 1em">how it works!
+        </a>
+    </p>
+
+    <aside class="notes">
+        @SBI<br/>
+
+        - Open source - Apache Licence<br/>
+        - Versionign tool for ml<br/>
+        - for... by ...<br/>
+
+        - see ... <br/>
+        TRANSITION: Not just a versioning tool
+    </aside>
+</section>
+
+<section>
+    <h5>DVC - Data Version Control</h5>
+    <div>
+        <img class="fragment current-visible" data-fragment-index="0" src="./img/dvc/dvc_home_page1.png">
+        <img class="fragment current-visible" data-fragment-index="1" src="./img/dvc/dvc_home_page2.png">
+        <img class="fragment current-visible" data-fragment-index="2" src="./img/dvc/dvc_home_page3.png">
+    </div>
+    <aside class="notes">
+        @SBI
+        - Versioning tool => DATA cache mechanism (REMOTE or LOCAL) <br/>
+        => Meatadat sous git (close to git lfs)<br/><br/>
+
+        - Amazing tool to perform experiment<br/>
+        - Project is handle as a PIPELINE composed of several STEP and DEPENDENCIES<br/>
+
+        - Collaboration: PUSH and PULL
+    </aside>
+</section>
+<section>
+    <h5>DVC - How it works</h5>
+
+    <div>
+        <img class="fragment current-visible embedded" src="./img/dvc/pipeline/DVC1.png">
+        <img class="fragment current-visible embedded" src="./img/dvc/pipeline/DVC2.png">
+        <img class="fragment current-visible embedded" src="./img/dvc/pipeline/DVC3.png">
+        <img class="fragment current-visible embedded" src="./img/dvc/pipeline/DVC4.png">
+        <img class="fragment current-visible embedded" src="./img/dvc/pipeline/DVC5.png">
+        <img class="fragment current-visible embedded" src="./img/dvc/pipeline/DVC9.png">
+    </div>
+    <p style="text-align: left"> Save all intermediate results: Metadata <span class="emph">+</span> data</p>
+    <aside class="notes">
+
+    </aside>
+</section>
+
+<section>
+    <h5>DVC - Reproduce only sub pipeline</h5>
+    <div>
+        <img class="fragment current-visible embedded" data-fragment-index="0" src="./img/dvc/pipeline/DVC9.png">
+        <img class="fragment current-visible embedded" data-fragment-index="1" src="./img/dvc/pipeline/DVC_change0.png">
+        <img class="fragment current-visible embedded" data-fragment-index="2" src="./img/dvc/pipeline/DVC_change1.png">
+        <img class="fragment current-visible embedded" data-fragment-index="3" src="./img/dvc/pipeline/DVC_change2.png">
+        <img class="fragment current-visible embedded" data-fragment-index="4" src="./img/dvc/pipeline/DVC_change2bis.png">
+        <img class="fragment current-visible embedded" data-fragment-index="5" src="./img/dvc/pipeline/DVC_change2bis.png">
+        <pre class="fragment current-visible embedded" data-fragment-index="5"><code>dvc repro evaluate.dvc</code></pre>
+        <img class="fragment current-visible embedded" data-fragment-index="6" src="./img/dvc/pipeline/DVC_change3.png">
+        <pre class="fragment current-visible embedded" data-fragment-index="6"><code>dvc repro evaluate.dvc</code></pre>
+        <img class="fragment current-visible embedded" data-fragment-index="7" src="./img/dvc/pipeline/DVC_change4.png">
+        <pre class="fragment current-visible embedded" data-fragment-index="7"><code>dvc repro evaluate.dvc</code></pre>
+        <img class="fragment current-visible embedded" data-fragment-index="8" src="./img/dvc/pipeline/DVC_change5.png">
+        <pre class="fragment current-visible embedded" data-fragment-index="8"><code>dvc repro evaluate.dvc</code></pre>
+        <img class="fragment current-visible embedded" data-fragment-index="9" src="./img/dvc/pipeline/DVC_change5.png">
+        <pre class="fragment current-visible embedded" data-fragment-index="9"><code>dvc repro evaluate.dvc</code></pre>
+    </div>
+    <p class="fragment current-visible" data-fragment-index="9" style="text-align: left">Do not re-run time consuming
+        tasks</p>
+    <aside class="notes">
+        @SBI<br/>
+        - Change param<br/>
+        - Want to recalculate METRICS<br/>
+        - run DVC ... evaluate step<br/>
+        - DETECTS out of date steps<br/>
+        - Re- run only needed tasks<br/>
+        - NO time consuming
+
+
+    </aside>
+</section>
+
+
+<section>
+    <h5>How to use</h5>
+    <p>
+    <pre><code>dvc run -d <span class="step_input">[input_dep]</span> -o <span class="step_output">[output]</span> [command]</code></pre>
+    </p>
+    <pre class="fragment" style="margin-top:8%">
+
+<code>[Tutorial time]
+
+
+Clone <a href="https://github.com/peopledoc/mlv-tools-tutorial">MLV-tools tutorial</a> repository
+
+Resources:
+cd mlv-tools-tutorial/resources/dvc_playground
+
+How to:
+mlv-tools-tutorial/tutorial/dvc_playground.md
+        </code></pre>
+</section>

@@ -1,0 +1,5 @@
+fasttext
+jupyter
+dvc
+ml-versioning-tools
+nltk
