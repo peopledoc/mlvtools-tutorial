@@ -21,6 +21,8 @@ Build & Run a Pipeline
 ----------------------
 
 ##### Build and start containers: 
+
+    cd mlv-tools-tutorial/resources/dvc_playground
     docker-compose build
     docker-compose up -d
     
