@@ -156,11 +156,14 @@ Phase 2: get configurable steps
 The aim of this first step is to remove hard-coded values and to **identify** which variables are **I/O** and 
 **parameters** for each step.
 
-You can edit **Jupyter Notebooks** by running:
+You can edit **Jupyter Notebooks** by running (on your **local machine**):
     
     jupyter notebook ./notebooks
     
 and then modify the notebooks in your browser. **I/O** and **parameters**  need to be assigned in the first code cell of the notebook.
+
+> If you are using the Docker container, you can edit Jupyter Notebooks from your local machine as the whole project
+is mounted inside the container as a volume.
 
 
 *For example in `notebooks/extract_data.ipynb`, the first cell will look like that:*

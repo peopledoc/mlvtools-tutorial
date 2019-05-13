@@ -205,3 +205,8 @@ All other steps are explain in each use cases.
     - [Use Case 3: Build a Pipeline from an Existing Pipeline](./tutorial/use_case3.md)
     - [Use Case 4: Hyperparameter optimisation and fine-tuning](./tutorial/use_case4.md)
 
+
+## Talks
+
+- [PyData Paris - March 2019 Meetup](https://www.meetup.com/fr-FR/PyData-Paris/events/259187805/): [talk](https://peopledoc.github.io/mlv-tools-tutorial/talks/pyData/presentation.html)
+- [PyData Amsterdam - May 2019](https://pydata.org/amsterdam2019/schedule/presentation/32/): [tutorial](https://peopledoc.github.io/mlv-tools-tutorial/talks/pyDataAmsterdam/tutorial/presentation.html)
