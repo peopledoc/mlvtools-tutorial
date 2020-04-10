@@ -68,13 +68,13 @@ The new classifier **Jupyter Notebook** is `03_bis_Classify_text.ipynb`.
 
         git commit -m 'Tutorial: use case 2 step 1 - Modify notebook'  ./poc/pipeline/notebooks/03_Classify_text.ipynb
 
-4. Re-generate Python 3 script
+4. Re-generate Python script
 
-        ipynb_to_python -n ./poc/pipeline/notebooks/03_Classify_text.ipynb -f
+        ipynb_to_python -w . -n ./poc/pipeline/notebooks/03_Classify_text.ipynb -f
 
 5. Re-generate command
 
-        gen_dvc -i ./poc/pipeline/steps/mlvtools_03_classify_text.py -f
+        gen_dvc -w . -i ./poc/pipeline/steps/mlvtools_03_classify_text.py -f
 
 6. Run the **DVC** step
 
@@ -155,8 +155,8 @@ Evaluation steps (train and test) are re-run using new model.
 9. Go back to tutorial branch
 
          git checkout -
-         dvc checkout  
-         
+         dvc checkout
+
 > After the checkout you can check results are those from use case 1.
 
  You reached the end of this tutorial, see [Use Case 3: Build a Pipeline from an Existing Pipeline](./use_case3.md)
