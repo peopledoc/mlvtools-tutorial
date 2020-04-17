@@ -1,5 +1,6 @@
 SHELL := /bin/bash
 develop:
+	pip install cython
 	pip install -r ./requirements.txt
 
 init-struct:

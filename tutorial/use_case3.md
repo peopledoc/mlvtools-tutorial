@@ -73,11 +73,11 @@ we want to reuse tokenized data and overwrite the previous pipeline.
         git add ./poc/pipeline/notebooks/03_bis_Classify_text.ipynb
         git commit -m 'Tutorial: use case 3 step 1 - Add notebook'
         
-        # Convert to Python 3 script
-        ipynb_to_python -n ./poc/pipeline/notebooks/03_bis_Classify_text.ipynb
+        # Convert to Python script
+        ipynb_to_python -w . -n ./poc/pipeline/notebooks/03_bis_Classify_text.ipynb
         
         # Generate command
-        gen_dvc -i ./poc/pipeline/steps/mlvtools_03_bis_classify_text.py
+        gen_dvc -w . -i ./poc/pipeline/steps/mlvtools_03_bis_classify_text.py
         
         # Run 
         ./poc/commands/dvc/mlvtools_03_bis_classify_text_dvc

@@ -1,10 +1,9 @@
-scikit-learn==0.19
+scikit-learn
 dvc
 mlflow
 jupyter
 pandas
 numpy
 nltk
-cython
 pyfasttext
-ml-versioning-tools
+mlvtools

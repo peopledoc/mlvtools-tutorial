@@ -7,7 +7,7 @@ The aim of this use case is to show how to build a pipeline and how to reproduce
 **Pipeline Overview**
 
     `20news-bydate_py3.pkz` = Split => `data_train.csv` = Tokenize => `data_train_tokenized.csv` = Classify => `fasttext_model.bin` = Evaluate => `metrics.txt`
-                                                                                                                                   \\                           
+                                                                                                                                   \\
                                          `data_test.csv`  = Tokenize => `data_test_tokenized.csv`  ============================== + \ = Evaluate => `metrics_test.txt`
 
 
@@ -42,15 +42,15 @@ This pipeline step is based on the `01_Extract_dataset.ipynb` **Jupyter notebook
 
        git commit -m 'Tutorial: use case 1 step 1 - Add notebook'
 
-5. Convert the **Jupyter notebook** into a parameterized **Python 3 script** using `ipynb_to_python`
+5. Convert the **Jupyter notebook** into a parameterized **Python script** using `ipynb_to_python`
 
-       ipynb_to_python -n ./poc/pipeline/notebooks/01_Extract_dataset.ipynb  
+       ipynb_to_python -w . -n ./poc/pipeline/notebooks/01_Extract_dataset.ipynb
 
    Ensure `./poc/pipeline/steps/mlvtools_01_extract_dataset.py` is well created.
 
-6. Create a **DVC** command to run the **Python 3** script using **DVC**
+6. Create a **DVC** command to run the **Python** script using **DVC**
 
-       gen_dvc -i ./poc/pipeline/steps/mlvtools_01_extract_dataset.py
+       gen_dvc -w . -i ./poc/pipeline/steps/mlvtools_01_extract_dataset.py
 
    Ensure `./poc/commands/dvc/mlvtools_01_extract_dataset_dvc` is created
 
@@ -98,11 +98,11 @@ In this very simple tutorial example, we do not apply any lemmatization techniqu
     git add ./poc/pipeline/notebooks/02_Tokenize_text.ipynb
     git commit -m 'Tutorial: use case 1 step 2 - Add notebook'
 
-    # Convert to Python 3 script
-    ipynb_to_python -n ./poc/pipeline/notebooks/02_Tokenize_text.ipynb
+    # Convert to Python script
+    ipynb_to_python -w . -n ./poc/pipeline/notebooks/02_Tokenize_text.ipynb
 
     # Generate command
-    gen_dvc -i ./poc/pipeline/steps/mlvtools_02_tokenize_text.py
+    gen_dvc -w . -i ./poc/pipeline/steps/mlvtools_02_tokenize_text.py
 
     # Run pipeline ./poc/commands/ ./poc/data/
     git commit -m 'Tutorial use case 1 step 2: tokenize text'
@@ -141,11 +141,11 @@ and not train the best classifier possible.
     git add ./poc/pipeline/notebooks/03_Classify_text.ipynb
     git commit -m 'Tutorial: use case 1 step 3 - Add notebook'
 
-    # Convert to Python 3 script
-    ipynb_to_python -n ./poc/pipeline/notebooks/03_Classify_text.ipynb
+    # Convert to Python script
+    ipynb_to_python -w . -n ./poc/pipeline/notebooks/03_Classify_text.ipynb
 
     # Generate command
-    gen_dvc -i ./poc/pipeline/steps/mlvtools_03_classify_text.py
+    gen_dvc -w . -i ./poc/pipeline/steps/mlvtools_03_classify_text.py
 
     # Run
     ./poc/commands/dvc/mlvtools_03_classify_text_dvc
@@ -176,11 +176,11 @@ Next, in the **Jupyter notebook** `04_Evaluate_model.ipynb` , we want to evaluat
     git add ./poc/pipeline/notebooks/04_Evaluate_model.ipynb
     git commit -m 'Tutorial: use case 1 step 4 - Add notebook'
 
-    # Convert to Python 3 script
-    ipynb_to_python -n ./poc/pipeline/notebooks/04_Evaluate_model.ipynb
+    # Convert to Python script
+    ipynb_to_python -w . -n ./poc/pipeline/notebooks/04_Evaluate_model.ipynb
 
     # Generate command
-    gen_dvc -i ./poc/pipeline/steps/mlvtools_04_evaluate_model.py
+    gen_dvc -w . -i ./poc/pipeline/steps/mlvtools_04_evaluate_model.py
 
     # Run
     ./poc/commands/dvc/mlvtools_04_evaluate_model_dvc
@@ -197,9 +197,9 @@ Check the result:
 ## Checkpoint
 
 Once this step is reached, half of the pipeline is created. For each **Jupyter notebook** we have the
-corresponding **Python 3** script and the **DVC** command.
+corresponding **Python** script and the **DVC** command.
 
-**Python 3** executable scripts are "generic", that means they can be applied to any inputs.
+**Python** executable scripts are "generic", that means they can be applied to any inputs.
 
 Next steps for this pipeline is to run the tokenization and the evaluation steps (notebooks `02_Tokenize_text.ipynb`
 and `04_Evaluate_model.ipynb`) on the **test dataset** (`./poc/data/data_test.csv`).
@@ -246,7 +246,7 @@ Save the file.
 Run new **DVC** pipeline step.
 
     ./poc/commands/dvc/mlvtools_02_test_tokenize_text_dvc
-    
+
 Check **DVC meta file** is created (it is used by **DVC** to track inputs and outputs of this pipeline step).
 
     ./mlvtools_02_test_tokenize_text.dvc
@@ -318,8 +318,8 @@ We can run an ultimate step to print the result of the pipeline.
 
     dvc run -f PipelineUseCase1.dvc -d ./poc/data/metrics.txt -d ./poc/data/metrics_test.txt \
         cat ./poc/data/metrics.txt ./poc/data/metrics_test.txt
-        
-    git add *.dvc 
+
+    git add *.dvc
     git commit -m "Tutorial use case 1 step 7: end of pipeline"
 
 ## 8 Reproduce the Pipeline
@@ -380,8 +380,8 @@ The complete pipeline is run on new data:
 
 See changes:
 
-    git status -s 
-    
+    git status -s
+
      M mlvtools_01_extract_dataset.dvc
      M mlvtools_02_test_tokenize_text.dvc
      M mlvtools_02_tokenize_text.dvc
