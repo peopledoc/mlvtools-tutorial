@@ -83,7 +83,7 @@ Following features will be demonstrated:
 
 6. Version setup under **git**
 
-        git add ./dummy *.dvc
+        git add ./dummy .dvc .mlvtools
         git commit -m 'Dummy pipeline setup'
 
 
